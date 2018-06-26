@@ -32,11 +32,6 @@ public class LangManager {
         this.defaults.put("no-perm-sign", "&cYou don't have permission to create a sign kit");
         
         this.data = new Config(this.ak.getDataFolder() + "/lang.properties", Config.PROPERTIES, new ConfigSection(this.defaults));
-        
-        /*if( this.data.getInt("lang-version") != LANG_VERSION ) {
-            this.ak.getLogger().alert("Translation file is outdated. The old file has been renamed and a new one has been created");
-            this.data = new Config(this.ak.getDataFolder() + "lang.properties", Config.PROPERTIES, new ConfigSection(this.defaults));
-        }*/
     }
     
     public String getTranslation(String dataKey) {

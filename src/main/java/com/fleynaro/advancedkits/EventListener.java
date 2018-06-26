@@ -12,7 +12,6 @@ import cn.nukkit.utils.TextFormat;
 
 class EventListener implements Listener {
 
-    /**@var Main*/
     private Main ak;
 
     public EventListener(Main ak){

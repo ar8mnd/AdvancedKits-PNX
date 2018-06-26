@@ -50,7 +50,7 @@ public class Main extends PluginBase implements Listener {
         }, 1200);
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
         
-        this.getLogger().info(TextFormat.WHITE +"The plugin "+ TextFormat.RED +"AdvancedKits"+ TextFormat.WHITE +" has been loaded.");
+        this.getLogger().info(TextFormat.WHITE +"The plugin "+ TextFormat.RED +"AdvancedKits"+ TextFormat.WHITE +" has been loaded");
     }
 
     @Override
@@ -102,19 +102,6 @@ public class Main extends PluginBase implements Listener {
             this.kits.put(entry.getKey(), new Kit(this, (ConfigSection) entry.getValue(), entry.getKey()));
         }
     }
-
-    /*private void fixConfig(&config){
-        foreach(config as name => kit){
-            if(isset(kit["users"])){
-                users = array_map("strtolower", kit["users"]);
-                config[name]["users"] = users;
-            }
-            if(isset(kit["worlds"])){
-                worlds = array_map("strtolower", kit["worlds"]);
-                config[name]["worlds"] = worlds;
-            }
-        }
-    }*/
 
     public String getKitList() {
         String allKits = "";

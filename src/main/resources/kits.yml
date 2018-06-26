@@ -62,7 +62,3 @@ start:
   # If you do not use permissions, use 'worlds' to specify in which worlds you want this kit to be used
   worlds:
   - "kitpvp"
-  # If you do not use permissions, use 'users' to specify which players will be able to get this kit
-  users:
-  - "luca28pet"
-  - "dioconsole"
