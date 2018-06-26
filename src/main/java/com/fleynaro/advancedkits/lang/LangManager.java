@@ -14,7 +14,7 @@ public class LangManager {
     private LinkedHashMap<String, Object> defaults = new LinkedHashMap<>();
     private Config data;
 
-    public LangManager(Main ak){
+    public LangManager(Main ak) {
         this.ak = ak;
         this.defaults.put("lang-version", 0);
         this.defaults.put("in-game", "Please run this command in game");
@@ -30,24 +30,25 @@ public class LangManager {
         this.defaults.put("cooldown-format3", "{%0} hours");
         this.defaults.put("no-sign-on-kit", "&cOn this sign, the kit is not specified");
         this.defaults.put("no-perm-sign", "&cYou don't have permission to create a sign kit");
-        
-        this.data = new Config(this.ak.getDataFolder() + "/lang.properties", Config.PROPERTIES, new ConfigSection(this.defaults));
+
+        this.data = new Config(this.ak.getDataFolder() + "/lang.properties", Config.PROPERTIES,
+                new ConfigSection(this.defaults));
     }
-    
+
     public String getTranslation(String dataKey) {
         return this.getTranslation(dataKey, null);
     }
 
     public String getTranslation(String dataKey, String[] args) {
-        if( !this.defaults.containsKey(dataKey) ){
-            this.ak.getLogger().error("Invalid dataKey "+ dataKey +" passed to method LangManager::getTranslation()");
+        if (!this.defaults.containsKey(dataKey)) {
+            this.ak.getLogger().error("Invalid dataKey " + dataKey + " passed to method LangManager::getTranslation()");
             return "";
         }
-        
+
         String str = this.data.getString(dataKey, (String) this.defaults.get(dataKey));
-        if ( args != null ) {
-            for ( int i = 0; i < args.length; i ++ ) {
-                str = str.replace("{%"+ i +"}", args[i]);
+        if (args != null) {
+            for (int i = 0; i < args.length; i++) {
+                str = str.replace("{%" + i + "}", args[i]);
             }
         }
         return TextFormat.colorize(str);
