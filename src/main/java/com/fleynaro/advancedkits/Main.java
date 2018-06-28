@@ -108,7 +108,7 @@ public class Main extends PluginBase implements Listener {
         for (String kitName : kits.keySet()) {
             allKits += kitName + "|";
         }
-        return allKits.substring(0, allKits.length() - 2);
+        return allKits.substring(0, allKits.length() - 1);
     }
 
     public Kit getKit(String kit) {
