@@ -25,9 +25,7 @@ public class Main extends PluginBase implements Listener {
     public void onEnable() {
         this.getDataFolder().mkdirs();
         this.saveDefaultConfig();
-        this.saveResource("lang/" + this.getServer().getLanguage().getLang().toUpperCase() + ".properties",
-                "/lang.properties", false);
-
+        this.saveResource("lang/" + this.getServer().getLanguage().getLang().toUpperCase() + ".properties", "/lang.properties", false);
         this.loadKits();
         this.economy = new EconomyManager(this);
         this.langManager = new LangManager(this);
@@ -51,8 +49,7 @@ public class Main extends PluginBase implements Listener {
         }, 1200);
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
 
-        this.getLogger().info(TextFormat.WHITE + "The plugin " + TextFormat.RED + "AdvancedKits" + TextFormat.WHITE
-                + " has been loaded");
+        this.getLogger().info(TextFormat.WHITE + "The plugin " + TextFormat.RED + "AdvancedKits" + TextFormat.WHITE + " has been loaded");
     }
 
     @Override

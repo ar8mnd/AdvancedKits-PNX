@@ -52,7 +52,7 @@ public class Kit {
                         return true;
                     } else {
                         player.sendMessage(
-                                this.ak.langManager.getTranslation("cant-afford", new String[] { this.name }));
+                        this.ak.langManager.getTranslation("cant-afford", new String[] { this.name }));
                     }
                 } else {
                     this.addTo(player);
@@ -111,7 +111,7 @@ public class Kit {
         String[] itemInfo = info.split(":");
 
         Item item = Item.get(Integer.parseInt(itemInfo[0]), Integer.parseInt(itemInfo[1]),
-                Integer.parseInt(itemInfo[2]));
+        Integer.parseInt(itemInfo[2]));
         if (itemInfo.length > 3 && !itemInfo[3].equals("default")) {
             item.setCustomName(itemInfo[3]);
         }
@@ -175,7 +175,7 @@ public class Kit {
     private boolean testPermission(Player player) {
         return this.ak.permManager ? player.hasPermission("advancedkits." + this.name.toLowerCase())
                 : ((this.data.containsKey("worlds")
-                        ? this.data.getList("worlds").contains(player.getLevel().getName().toLowerCase())
+                        ? this.data.getList("worlds").contains(player.getLevel().getName())
                         : true));
     }
 

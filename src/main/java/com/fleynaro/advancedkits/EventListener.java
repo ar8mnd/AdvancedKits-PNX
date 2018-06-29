@@ -26,8 +26,7 @@ class EventListener implements Listener {
             BlockEntity tile = player.getLevel().getBlockEntity(event.getBlock().getLocation());
             if (tile instanceof BlockEntitySign) {
                 String[] text = ((BlockEntitySign) tile).getText();
-                if (TextFormat.clean(text[0]).toLowerCase()
-                        .equals(this.ak.getConfig().getString("sign-text").toLowerCase())) {
+                if (TextFormat.clean(text[0]).toLowerCase().equals(this.ak.getConfig().getString("sign-text").toLowerCase())) {
                     event.setCancelled();
                     if (text[1].isEmpty()) {
                         event.getPlayer().sendMessage(this.ak.langManager.getTranslation("no-sign-on-kit"));
@@ -46,9 +45,7 @@ class EventListener implements Listener {
 
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
-        if (TextFormat.clean(event.getLine(0)).toLowerCase()
-                .equals(this.ak.getConfig().getString("sign-text").toLowerCase())
-                && !event.getPlayer().hasPermission("advancedkits.admin")) {
+        if (TextFormat.clean(event.getLine(0)).toLowerCase().equals(this.ak.getConfig().getString("sign-text").toLowerCase()) && !event.getPlayer().hasPermission("advancedkits.admin")) {
             event.getPlayer().sendMessage(this.ak.langManager.getTranslation("no-perm-sign"));
             event.setCancelled();
         }

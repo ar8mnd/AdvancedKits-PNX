@@ -48,7 +48,7 @@ start:
   boots: "305:0:1"
 
   commands:
-  - "tell {player} you got an awesome kit thanks to AdvancedKits plugin!"
+  - "tell {player} you just got kit! This message can be changed or removed in kit settings."
 
   cooldown:
     hours: 24
@@ -61,4 +61,4 @@ start:
 
   # If you do not use permissions, use 'worlds' to specify in which worlds you want this kit to be used
   worlds:
-  - "kitpvp"
+  - "world"
