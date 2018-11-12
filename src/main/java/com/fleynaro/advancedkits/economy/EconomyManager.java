@@ -18,7 +18,7 @@ public class EconomyManager {
         if (this.api != null && this.api.reduceMoney(player, money) == 1) {
             return true;
         }
+
         return false;
     }
-
 }

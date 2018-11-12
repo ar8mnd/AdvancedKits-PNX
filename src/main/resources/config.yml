@@ -4,5 +4,8 @@ permissions: true
 # Sign text (capitals don't matter)
 sign-text: "[Kit]"
 
-# AutoSave in minutes
+# Auto save in minutes
 autosave: 5
+
+# Clear player's inventory and effects when he gets a kit
+clear-inventory: false

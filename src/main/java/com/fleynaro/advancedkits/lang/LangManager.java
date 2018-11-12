@@ -20,7 +20,6 @@ public class LangManager {
         this.defaults.put("in-game", "Please run this command in game");
         this.defaults.put("av-kits", "Available kits: {%0}");
         this.defaults.put("no-kit", "Kit &e{%0} &fdoes not exist");
-        this.defaults.put("reload", "Reloaded kits settings");
         this.defaults.put("sel-kit", "&eSelected kit: &b{%0}");
         this.defaults.put("cant-afford", "You cannot afford kit: {%0}");
         this.defaults.put("cooldown", "&dYou will be able to get it in &c{%0}");
@@ -31,8 +30,7 @@ public class LangManager {
         this.defaults.put("no-sign-on-kit", "&cOn this sign, the kit is not specified");
         this.defaults.put("no-perm-sign", "&cYou don't have permission to create a sign kit");
 
-        this.data = new Config(this.ak.getDataFolder() + "/lang.properties", Config.PROPERTIES,
-                new ConfigSection(this.defaults));
+        this.data = new Config(this.ak.getDataFolder() + "/lang.properties", Config.PROPERTIES, new ConfigSection(this.defaults));
     }
 
     public String getTranslation(String dataKey) {
@@ -51,7 +49,7 @@ public class LangManager {
                 str = str.replace("{%" + i + "}", args[i]);
             }
         }
+
         return TextFormat.colorize(str);
     }
-
 }

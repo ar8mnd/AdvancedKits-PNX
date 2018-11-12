@@ -71,6 +71,12 @@ public class Kit {
 
     public void addTo(Player player) {
         PlayerInventory inv = player.getInventory();
+
+        if (ak.getConfig().getBoolean("clear-inventory")) {
+            inv.clearAll();
+            player.removeAllEffects();
+        }
+
         for (String itemInfo : this.data.getStringList("items")) {
             Item item = this.loadItem(itemInfo);
             inv.setItem(inv.firstEmpty(item), item);
@@ -121,15 +127,18 @@ public class Kit {
             enchant.setLevel(Integer.parseInt(itemInfo[i + 1]));
             item.addEnchantment(enchant);
         }
+
         return item;
     }
 
     private Effect loadEffect(String info) {
         String[] effectInfo = info.split(":");
         Effect e = Effect.getEffectByName(effectInfo[0]);
+
         if (e != null) {
             return e.setDuration(Integer.parseInt(effectInfo[1]) * 20).setAmplifier(Integer.parseInt(effectInfo[2]));
         }
+
         return null;
     }
 
@@ -146,6 +155,7 @@ public class Kit {
         } else {
             min = 24 * 60;
         }
+
         return min;
     }
 
@@ -159,6 +169,7 @@ public class Kit {
             return this.ak.langManager.getTranslation("cooldown-format2",
                     new String[] { "" + Math.floor(minutes / 60), "" + modulo });
         }
+
         return this.ak.langManager.getTranslation("cooldown-format3", new String[] { "" + (minutes / 60) });
     }
 
@@ -173,14 +184,10 @@ public class Kit {
     }
 
     private boolean testPermission(Player player) {
-        return this.ak.permManager ? player.hasPermission("advancedkits." + this.name.toLowerCase())
-                : ((this.data.containsKey("worlds")
-                        ? this.data.getList("worlds").contains(player.getLevel().getName())
-                        : true));
+        return this.ak.permManager ? player.hasPermission("advancedkits." + this.name.toLowerCase()) : ((this.data.containsKey("worlds") ? this.data.getList("worlds").contains(player.getLevel().getName()) : true));
     }
 
     public void save() {
         this.coolDowns.save();
     }
-
 }

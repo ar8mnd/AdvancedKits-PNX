@@ -19,7 +19,7 @@ class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onSign(PlayerInteractEvent event) {
+    public void onSignClick(PlayerInteractEvent event) {
         int id = event.getBlock().getId();
         Player player = event.getPlayer();
         if (id == Block.SIGN_POST || id == Block.WALL_SIGN) {
@@ -37,6 +37,7 @@ class EventListener implements Listener {
                         player.sendMessage(this.ak.langManager.getTranslation("no-kit", new String[] { text[1] }));
                         return;
                     }
+
                     kit.handleRequest(player);
                 }
             }

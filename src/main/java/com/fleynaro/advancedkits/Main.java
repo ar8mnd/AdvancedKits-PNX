@@ -9,7 +9,6 @@ import com.fleynaro.advancedkits.lang.LangManager;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.ConfigSection;
-import cn.nukkit.utils.TextFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -48,8 +47,6 @@ public class Main extends PluginBase implements Listener {
             }
         }, 1200);
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
-
-        this.getLogger().info(TextFormat.WHITE + "The plugin " + TextFormat.RED + "AdvancedKits" + TextFormat.WHITE + " has been loaded");
     }
 
     @Override
@@ -79,22 +76,15 @@ public class Main extends PluginBase implements Listener {
             kit.handleRequest((Player) sender);
             return true;
         }
-        case "akreload": {
-            for (Map.Entry<String, Kit> entry : kits.entrySet()) {
-                entry.getValue().save();
-            }
-            this.kits = null;
-            this.loadKits();
-            sender.sendMessage(this.langManager.getTranslation("reload"));
-            return true;
-        }
         }
         return true;
     }
 
     private void loadKits() {
         this.saveResource("kits.yml");
+
         Config cfgKits = new Config(this.getDataFolder() + "/kits.yml", Config.YAML);
+
         for (Map.Entry<String, Object> entry : cfgKits.getAll().entrySet()) {
             this.kits.put(entry.getKey(), new Kit(this, (ConfigSection) entry.getValue(), entry.getKey()));
         }
@@ -102,18 +92,23 @@ public class Main extends PluginBase implements Listener {
 
     public String getKitList() {
         String allKits = "";
+
         for (String kitName : kits.keySet()) {
             allKits += kitName + "|";
         }
+
         return allKits.substring(0, allKits.length() - 1);
     }
 
     public Kit getKit(String kit) {
         Map<String, Kit> lowerKeys = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
         lowerKeys.putAll(kits);
+
         if (lowerKeys.containsKey(kit.toLowerCase())) {
             return lowerKeys.get(kit.toLowerCase());
         }
+
         return null;
     }
 }
