@@ -15,10 +15,6 @@ public class EconomyManager {
     }
 
     public boolean grantKit(Player player, int money) {
-        if (this.api != null && this.api.reduceMoney(player, money) == 1) {
-            return true;
-        }
-
-        return false;
+        return this.api != null && this.api.reduceMoney(player, money) == 1;
     }
 }

@@ -8,8 +8,6 @@ import java.util.LinkedHashMap;
 
 public class LangManager {
 
-    public int LANG_VERSION = 0;
-
     private Main ak;
     private LinkedHashMap<String, Object> defaults = new LinkedHashMap<>();
     private Config data;

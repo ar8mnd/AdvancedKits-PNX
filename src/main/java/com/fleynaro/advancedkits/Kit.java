@@ -16,7 +16,7 @@ public class Kit {
     private ConfigSection data;
     private String name;
     private int cost = 0;
-    private int coolDown = 0;
+    private int coolDown;
     private Config coolDowns;
     private final ConfigSection coolDownsPlayer;
 
@@ -36,10 +36,6 @@ public class Kit {
                     }
                 }));
         coolDownsPlayer = this.coolDowns.getSection("players");
-    }
-
-    public String getName() {
-        return this.name;
     }
 
     public boolean handleRequest(Player player) {

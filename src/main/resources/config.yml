@@ -1,7 +1,7 @@
 # Permission use
 permissions: true
 
-# Sign text (capitals don't matter)
+# Sign text (capitals doesn't matter)
 sign-text: "[Kit]"
 
 # Auto save in minutes
@@ -9,3 +9,8 @@ autosave: 5
 
 # Clear player's inventory and effects when he gets a kit
 clear-inventory: false
+
+# Give a kit when player joins for first time
+first-join-kit:
+  enabled: false
+  kit: "start"

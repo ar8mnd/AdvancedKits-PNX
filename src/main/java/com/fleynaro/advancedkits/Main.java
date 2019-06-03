@@ -15,22 +15,20 @@ import java.util.TreeMap;
 
 public class Main extends PluginBase implements Listener {
 
-    public Map<String, Kit> kits = new HashMap<>();
-    public EconomyManager economy;
-    public boolean permManager = false;
-    public LangManager langManager;
+    private Map<String, Kit> kits = new HashMap<>();
+    EconomyManager economy;
+    boolean permManager;
+    LangManager langManager;
 
     @Override
     public void onEnable() {
-        this.getDataFolder().mkdirs();
         this.saveDefaultConfig();
         this.saveResource("lang/" + this.getServer().getLanguage().getLang().toUpperCase() + ".properties", "/lang.properties", false);
         this.loadKits();
         this.economy = new EconomyManager(this);
         this.langManager = new LangManager(this);
-        if (this.getConfig().getBoolean("permissions")) {
-            this.permManager = true;
-        }
+        this.permManager = this.getConfig().getBoolean("permissions");
+
         this.getServer().getScheduler().scheduleRepeatingTask(this, new Runnable() {
             private int min = 0;
             private int everyMin = getConfig().getInt("autosave");
@@ -46,7 +44,12 @@ public class Main extends PluginBase implements Listener {
                 }
             }
         }, 1200);
+
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
+
+        if (getConfig().getBoolean("first-join-kit.enabled")) {
+            this.getServer().getPluginManager().registerEvents(new JoinKitListener(this), this);
+        }
     }
 
     @Override
@@ -58,24 +61,22 @@ public class Main extends PluginBase implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        switch (command.getName().toLowerCase()) {
-        case "kit": {
+        if (command.getName().equalsIgnoreCase("kit")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(this.langManager.getTranslation("in-game"));
                 return true;
             }
             if (args.length == 0) {
-                sender.sendMessage(this.langManager.getTranslation("av-kits", new String[] { this.getKitList() }));
+                sender.sendMessage(this.langManager.getTranslation("av-kits", new String[]{this.getKitList()}));
                 return true;
             }
             Kit kit = this.getKit(args[0]);
             if (kit == null) {
-                sender.sendMessage(this.langManager.getTranslation("no-kit", new String[] { args[0] }));
+                sender.sendMessage(this.langManager.getTranslation("no-kit", new String[]{args[0]}));
                 return true;
             }
             kit.handleRequest((Player) sender);
             return true;
-        }
         }
         return true;
     }
@@ -91,10 +92,10 @@ public class Main extends PluginBase implements Listener {
     }
 
     public String getKitList() {
-        String allKits = "";
+        StringBuilder allKits = new StringBuilder();
 
         for (String kitName : kits.keySet()) {
-            allKits += kitName + "|";
+            allKits.append(kitName).append("|");
         }
 
         return allKits.substring(0, allKits.length() - 1);

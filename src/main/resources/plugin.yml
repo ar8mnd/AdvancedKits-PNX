@@ -5,6 +5,7 @@ author: luca28pet, fleynaro, PetteriM1
 api: ["1.0.0"]
 description: Kit plugin for Nukkit
 website: https://github.com/Nukkit-coders/AdvancedKits
+softdepend: ["EconomyAPI"]
 
 commands:
  kit:
