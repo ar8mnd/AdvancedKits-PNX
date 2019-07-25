@@ -4,13 +4,13 @@ version: "${pom.version}"
 author: luca28pet, fleynaro, PetteriM1
 api: ["1.0.0"]
 description: Kit plugin for Nukkit
-website: https://github.com/Nukkit-coders/AdvancedKits
+website: https://nukkitx.com/resources/advancedkits.88/
 softdepend: ["EconomyAPI"]
 
 commands:
  kit:
   description: Get a kit!
-  usage: "/kit <kitName>"
+  usage: "/kit <kit name>"
   permission: advancedkits.command
 permissions:
  advancedkits.command:

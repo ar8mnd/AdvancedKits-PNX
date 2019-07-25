@@ -62,6 +62,20 @@ public class Main extends PluginBase implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("kit")) {
+            if (args.length == 2 && sender.isOp()) {
+                Kit kit = this.getKit(args[0]);
+                if (kit == null) {
+                    sender.sendMessage(this.langManager.getTranslation("no-kit", new String[]{args[0]}));
+                    return true;
+                }
+                Player p = getServer().getPlayer(args[1]);
+                if (p == null) {
+                    sender.sendMessage(this.langManager.getTranslation("no-player", new String[]{args[1]}));
+                    return true;
+                }
+                kit.addTo(p);
+                return true;
+            }
             if (!(sender instanceof Player)) {
                 sender.sendMessage(this.langManager.getTranslation("in-game"));
                 return true;
@@ -70,13 +84,16 @@ public class Main extends PluginBase implements Listener {
                 sender.sendMessage(this.langManager.getTranslation("av-kits", new String[]{this.getKitList()}));
                 return true;
             }
-            Kit kit = this.getKit(args[0]);
-            if (kit == null) {
-                sender.sendMessage(this.langManager.getTranslation("no-kit", new String[]{args[0]}));
+            if (args.length == 1) {
+                Kit kit = this.getKit(args[0]);
+                if (kit == null) {
+                    sender.sendMessage(this.langManager.getTranslation("no-kit", new String[]{args[0]}));
+                    return true;
+                }
+                kit.handleRequest((Player) sender);
                 return true;
             }
-            kit.handleRequest((Player) sender);
-            return true;
+            return false;
         }
         return true;
     }

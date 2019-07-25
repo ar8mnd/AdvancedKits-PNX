@@ -14,7 +14,7 @@ public class LangManager {
 
     public LangManager(Main ak) {
         this.ak = ak;
-        this.defaults.put("lang-version", 0);
+        this.defaults.put("lang-version", 1);
         this.defaults.put("in-game", "Please run this command in game");
         this.defaults.put("av-kits", "Available kits: {%0}");
         this.defaults.put("no-kit", "Kit &e{%0} &fdoes not exist");
@@ -27,7 +27,7 @@ public class LangManager {
         this.defaults.put("cooldown-format3", "{%0} hours");
         this.defaults.put("no-sign-on-kit", "&cOn this sign, the kit is not specified");
         this.defaults.put("no-perm-sign", "&cYou don't have permission to create a sign kit");
-
+        this.defaults.put("no-player", "§cUnknown player: {%0}");
         this.data = new Config(this.ak.getDataFolder() + "/lang.properties", Config.PROPERTIES, new ConfigSection(this.defaults));
     }
 
