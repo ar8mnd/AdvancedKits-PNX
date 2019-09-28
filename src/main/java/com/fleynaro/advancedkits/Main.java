@@ -15,13 +15,16 @@ import java.util.TreeMap;
 
 public class Main extends PluginBase implements Listener {
 
-    private Map<String, Kit> kits = new HashMap<>();
+    public static Main instance;
+    public Map<String, Kit> kits = new HashMap<>();
     EconomyManager economy;
     boolean permManager;
     LangManager langManager;
 
     @Override
     public void onEnable() {
+        instance = this;
+
         this.saveDefaultConfig();
         this.saveResource("lang/" + this.getServer().getLanguage().getLang().toUpperCase() + ".properties", "/lang.properties", false);
         this.loadKits();
