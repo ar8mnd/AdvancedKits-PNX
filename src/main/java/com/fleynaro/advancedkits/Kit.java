@@ -40,15 +40,14 @@ public class Kit {
 
     public boolean handleRequest(Player player) {
         if (this.testPermission(player)) {
-            if (!this.coolDownsPlayer.exists(player.getName().toLowerCase())) {
+            if (!this.coolDownsPlayer.exists(player.getName().toLowerCase()) || player.hasPermission("advancedkits.bypasscooldown")) {
                 if (this.cost > 0) {
                     if (this.ak.economy.grantKit(player, this.cost)) {
                         this.addTo(player);
                         player.sendMessage(this.ak.langManager.getTranslation("sel-kit", new String[] { this.name }));
                         return true;
                     } else {
-                        player.sendMessage(
-                        this.ak.langManager.getTranslation("cant-afford", new String[] { this.name }));
+                        player.sendMessage(this.ak.langManager.getTranslation("cant-afford", new String[] { this.name }));
                     }
                 } else {
                     this.addTo(player);
@@ -149,7 +148,7 @@ public class Kit {
                 min += cooldown.getInt("hours") * 60;
             }
         } else {
-            min = 24 * 60;
+            min = 1440;
         }
 
         return min;

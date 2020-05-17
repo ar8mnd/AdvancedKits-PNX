@@ -16,3 +16,6 @@ permissions:
  advancedkits.command:
   description: "Allows the user to run /kit command"
   default: true
+ advancedkits.bypasscooldown:
+  description: "Allows the user to bypass kit cooldown"
+  default: false
