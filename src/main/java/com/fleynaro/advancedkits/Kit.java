@@ -181,7 +181,7 @@ public class Kit {
     private boolean testPermission(Player player) {
         return this.ak.permManager ?
                 player.hasPermission("advancedkits." + this.name.toLowerCase()) :
-                this.data.getStringList("worlds").contains(player.getLevel().getName());
+                (!this.data.containsKey("worlds") || this.data.getStringList("worlds").contains(player.getLevel().getName()));
     }
 
     public void save() {

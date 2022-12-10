@@ -61,7 +61,8 @@ start:
   effects:
   - "speed:120:2"
 
-  # If you do not use permissions, use 'worlds' to specify in which worlds you want this kit to be usable
+  # If you don't use permissions, use 'worlds' to specify in which worlds you want this kit to be usable
+  # Remove 'worlds' to allow everywhere
   worlds:
   - "world"
 
