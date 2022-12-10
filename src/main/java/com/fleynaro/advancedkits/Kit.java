@@ -12,12 +12,12 @@ import java.util.LinkedHashMap;
 
 public class Kit {
 
-    private Main ak;
-    private ConfigSection data;
-    private String name;
+    private final Main ak;
+    private final ConfigSection data;
+    private final String name;
     private int cost = 0;
-    private int coolDown;
-    private Config coolDowns;
+    private final int coolDown;
+    private final Config coolDowns;
     private final ConfigSection coolDownsPlayer;
 
     public Kit(Main ak, ConfigSection data, String name) {
@@ -25,7 +25,7 @@ public class Kit {
         this.data = data;
         this.name = name;
         this.coolDown = this.getCoolDownMinutes();
-        if (this.data.containsKey("money") && this.data.getInt("money") != 0) {
+        if (this.data.containsKey("money")) {
             this.cost = this.data.getInt("money");
         }
 
@@ -119,7 +119,7 @@ public class Kit {
 
         for (int i = 4; i <= itemInfo.length - 2; i += 2) {
             Enchantment enchant = Enchantment.getEnchantment(Integer.parseInt(itemInfo[i]));
-            enchant.setLevel(Integer.parseInt(itemInfo[i + 1]));
+            enchant.setLevel(Integer.parseInt(itemInfo[i + 1]), false);
             item.addEnchantment(enchant);
         }
 
@@ -179,7 +179,9 @@ public class Kit {
     }
 
     private boolean testPermission(Player player) {
-        return this.ak.permManager ? player.hasPermission("advancedkits." + this.name.toLowerCase()) : ((this.data.containsKey("worlds") ? this.data.getList("worlds").contains(player.getLevel().getName()) : true));
+        return this.ak.permManager ?
+                player.hasPermission("advancedkits." + this.name.toLowerCase()) :
+                this.data.getStringList("worlds").contains(player.getLevel().getName());
     }
 
     public void save() {

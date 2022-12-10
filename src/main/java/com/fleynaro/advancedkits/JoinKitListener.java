@@ -7,7 +7,7 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 
 class JoinKitListener implements Listener {
 
-    private Main ak;
+    private final Main ak;
 
     public JoinKitListener(Main ak) {
         this.ak = ak;

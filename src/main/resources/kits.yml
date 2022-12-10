@@ -1,5 +1,5 @@
 # An example kit called "start"
-# Copy this to end of this file to add more kits
+# Copy this to end of the file to add more kits
 start:
   # Format: "id:damage:count:name:ench_name:ench_level"
 
@@ -39,7 +39,7 @@ start:
   #  FORTUNE FISHING = 23 
   #  LURE = 24 
 
-  # Please note: You have to write numeric IDs
+  # Note: You have to use numeric IDs
   items:
   - "260:0:10"
   - "1:0:64"
@@ -50,7 +50,7 @@ start:
   boots: "305:0:1"
 
   commands:
-  - "tell {player} you just got kit! This message can be changed or removed in kit settings."
+  - "tell {player} You got a kit! This message can be changed or removed in kits.yml"
 
   cooldown:
     hours: 24
@@ -61,6 +61,9 @@ start:
   effects:
   - "speed:120:2"
 
-  # If you do not use permissions, use 'worlds' to specify in which worlds you want this kit to be used
+  # If you do not use permissions, use 'worlds' to specify in which worlds you want this kit to be usable
   worlds:
   - "world"
+
+  # Use EconomyAPI to make paid kits
+  money: 0

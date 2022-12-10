@@ -1,16 +1,16 @@
-# Permission use
+# Use permissions (advancedkits.<kit name in lowercase>)
 permissions: true
 
-# Sign text (capitals doesn't matter)
+# Sign text (not case-sensitive)
 sign-text: "[Kit]"
 
 # Auto save in minutes
 autosave: 5
 
-# Clear player's inventory and effects when he gets a kit
+# Clear player's inventory and potion effects before giving a kit
 clear-inventory: false
 
-# Give a kit when player joins for first time
+# Give a kit when player joins for the first time
 first-join-kit:
   enabled: false
   kit: "start"

@@ -34,7 +34,7 @@ public class Main extends PluginBase implements Listener {
 
         this.getServer().getScheduler().scheduleRepeatingTask(this, new Runnable() {
             private int min = 0;
-            private int everyMin = getConfig().getInt("autosave");
+            private final int everyMin = getConfig().getInt("autosave");
 
             public void run() {
                 for (Kit kit : kits.values()) {
@@ -64,7 +64,7 @@ public class Main extends PluginBase implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("kit")) {
+        if (command.getName().equals("kit")) {
             if (args.length == 2 && sender.isOp()) {
                 Kit kit = this.getKit(args[0]);
                 if (kit == null) {
@@ -105,6 +105,8 @@ public class Main extends PluginBase implements Listener {
         this.saveResource("kits.yml");
 
         Config cfgKits = new Config(this.getDataFolder() + "/kits.yml", Config.YAML);
+
+        this.kits.clear();
 
         for (Map.Entry<String, Object> entry : cfgKits.getAll().entrySet()) {
             this.kits.put(entry.getKey(), new Kit(this, (ConfigSection) entry.getValue(), entry.getKey()));

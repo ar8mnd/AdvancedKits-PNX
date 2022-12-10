@@ -12,7 +12,7 @@ import cn.nukkit.utils.TextFormat;
 
 class EventListener implements Listener {
 
-    private Main ak;
+    private final Main ak;
 
     public EventListener(Main ak) {
         this.ak = ak;
@@ -26,8 +26,8 @@ class EventListener implements Listener {
             BlockEntity tile = player.getLevel().getBlockEntity(event.getBlock().getLocation());
             if (tile instanceof BlockEntitySign) {
                 String[] text = ((BlockEntitySign) tile).getText();
-                if (text[0] != null && TextFormat.clean(text[0]).toLowerCase().equals(this.ak.getConfig().getString("sign-text").toLowerCase())) {
-                    event.setCancelled();
+                if (text[0] != null && TextFormat.clean(text[0]).equalsIgnoreCase(this.ak.getConfig().getString("sign-text"))) {
+                    event.setCancelled(true);
                     if (text[1] == null || text[1].isEmpty()) {
                         event.getPlayer().sendMessage(this.ak.langManager.getTranslation("no-sign-on-kit"));
                         return;
@@ -46,7 +46,7 @@ class EventListener implements Listener {
 
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
-        if (TextFormat.clean(event.getLine(0)).toLowerCase().equals(this.ak.getConfig().getString("sign-text").toLowerCase()) && !event.getPlayer().hasPermission("advancedkits.admin")) {
+        if (TextFormat.clean(event.getLine(0)).equalsIgnoreCase(this.ak.getConfig().getString("sign-text")) && !event.getPlayer().hasPermission("advancedkits.admin")) {
             event.getPlayer().sendMessage(this.ak.langManager.getTranslation("no-perm-sign"));
             event.setCancelled();
         }
