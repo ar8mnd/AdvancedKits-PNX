@@ -1,8 +1,9 @@
 package com.fleynaro.advancedkits.economy;
 
+import angga7togk.economyapi.EconomyAPI;
+import angga7togk.economyapi.database.EconomyDB;
 import cn.nukkit.Player;
 import com.fleynaro.advancedkits.Main;
-import me.onebone.economyapi.EconomyAPI;
 
 public class EconomyManager {
 
@@ -15,6 +16,6 @@ public class EconomyManager {
     }
 
     public boolean grantKit(Player player, int money) {
-        return this.api != null && this.api.reduceMoney(player, money) == 1;
+        return this.api != null && EconomyDB.reduceMoney(player, money);
     }
 }

@@ -20,9 +20,9 @@ class EventListener implements Listener {
 
     @EventHandler
     public void onSignClick(PlayerInteractEvent event) {
-        int id = event.getBlock().getId();
+        String id = event.getBlock().getId();
         Player player = event.getPlayer();
-        if (id == Block.SIGN_POST || id == Block.WALL_SIGN) {
+        if (id.equals(Block.STANDING_SIGN) || id.equals(Block.WALL_SIGN)) {
             BlockEntity tile = player.getLevel().getBlockEntity(event.getBlock().getLocation());
             if (tile instanceof BlockEntitySign) {
                 String[] text = ((BlockEntitySign) tile).getText();

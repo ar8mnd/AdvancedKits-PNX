@@ -2,10 +2,10 @@ package com.fleynaro.advancedkits;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
-import cn.nukkit.inventory.PlayerInventory;
+import cn.nukkit.inventory.HumanInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import cn.nukkit.potion.Effect;
+import cn.nukkit.entity.effect.Effect;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.ConfigSection;
 import java.util.LinkedHashMap;
@@ -65,7 +65,7 @@ public class Kit {
     }
 
     public void addTo(Player player) {
-        PlayerInventory inv = player.getInventory();
+        HumanInventory inv = player.getInventory();
 
         if (ak.getConfig().getBoolean("clear-inventory")) {
             inv.clearAll();
@@ -98,7 +98,7 @@ public class Kit {
 
         if (this.data.containsKey("commands") && this.data.isList("commands")) {
             for (String cmdInfo : this.data.getStringList("commands")) {
-                this.ak.getServer().dispatchCommand(new ConsoleCommandSender(),
+                this.ak.getServer().executeCommand(new ConsoleCommandSender(),
                         cmdInfo.replace("{player}", player.getName()));
             }
         }
@@ -111,16 +111,22 @@ public class Kit {
     private Item loadItem(String info) {
         String[] itemInfo = info.split(":");
 
-        Item item = Item.get(Integer.parseInt(itemInfo[0]), Integer.parseInt(itemInfo[1]),
-        Integer.parseInt(itemInfo[2]));
-        if (itemInfo.length > 3 && !itemInfo[3].equals("default")) {
+        // Assuming the new item lookup method based on string ID
+        Item item = Item.get(
+                itemInfo[0], Integer.parseInt(itemInfo[1]), // WATCH.
+                Integer.parseInt(itemInfo[2])
+        );
+
+        if (itemInfo.length > 3 && !itemInfo[3].equalsIgnoreCase("default")) {
             item.setCustomName(itemInfo[3]);
         }
 
         for (int i = 4; i <= itemInfo.length - 2; i += 2) {
-            Enchantment enchant = Enchantment.getEnchantment(Integer.parseInt(itemInfo[i]));
-            enchant.setLevel(Integer.parseInt(itemInfo[i + 1]), false);
-            item.addEnchantment(enchant);
+            Enchantment enchant = Enchantment.getEnchantment(itemInfo[i]);
+            if (enchant != null) {
+                enchant.setLevel(Integer.parseInt(itemInfo[i + 1]), false);
+                item.addEnchantment(enchant);
+            }
         }
 
         return item;
@@ -128,7 +134,7 @@ public class Kit {
 
     private Effect loadEffect(String info) {
         String[] effectInfo = info.split(":");
-        Effect e = Effect.getEffectByName(effectInfo[0]);
+        Effect e = Effect.get(effectInfo[0]);
 
         if (e != null) {
             return e.setDuration(Integer.parseInt(effectInfo[1]) * 20).setAmplifier(Integer.parseInt(effectInfo[2]));
